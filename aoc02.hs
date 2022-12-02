@@ -15,15 +15,9 @@ hFetchLines h = do
     let contentLines = lines content
     return contentLines
 
-getTestInput :: String -> IO [String]
-getTestInput day = do
-    let filename = "test" ++ day
-    h <- openFile filename ReadMode
-    hFetchLines h
-
-getRealInput :: String -> IO [String]
-getRealInput day = do
-    let filename = "input" ++ day
+getInput :: String -> String -> IO [String]
+getInput mode day = do
+    let filename = mode ++ day
     h <- openFile filename ReadMode
     hFetchLines h
 
@@ -112,14 +106,14 @@ day = "02"
 
 part1 :: IO ()
 part1 = do
-    testInput <- getTestInput day
+    testInput <- getInput "test" day
     print(totalScore1 testInput)
-    realInput <- getRealInput day
+    realInput <- getInput "input" day
     print(totalScore1 realInput)
 
 part2 :: IO ()
 part2 = do
-    testInput <- getTestInput day
+    testInput <- getInput "test" day
     print(totalScore2 testInput)
-    realInput <- getRealInput day
+    realInput <- getInput "input" day
     print(totalScore2 realInput)

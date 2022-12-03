@@ -4,7 +4,7 @@ import Data.List ( sort )
 import System.IO
     ( openFile, hGetContents, Handle, IOMode(ReadMode) )
 import Data.Char (ord, isLower)
-import Data.Maybe ( fromMaybe, isJust )
+import Data.Maybe ( fromMaybe, fromJust )
 
 ---------------------------------------
 -- helper functions
@@ -35,11 +35,8 @@ duplicate (x:xs,ys)
     | x `elem` ys   = Just x 
     | otherwise     = duplicate (xs,ys)
 
-fromJust :: [Maybe Char] -> [Char]
-fromJust l = map (fromMaybe '+') (filter isJust l)
-
 duplicates :: [String] -> [Char]
-duplicates l = fromJust (map (duplicate . split ) l)
+duplicates = map (fromJust . duplicate . split)
 
 priority :: Char -> Int
 priority c
@@ -64,7 +61,7 @@ badge [x:xs,ys,zs]
 badge y = error "invalid group "
 
 badges :: [String] -> [Char]
-badges l = fromJust (map badge (elfGroups l))
+badges l = map (fromJust . badge) (elfGroups l)
 
 badgeSum :: [String] -> Int
 badgeSum l = sum $ map priority (badges l)

@@ -4,7 +4,7 @@ import Data.List ( sort )
 import System.IO
     ( openFile, hGetContents, Handle, IOMode(ReadMode) )
 import Data.Char (ord, isLower)
-import Data.Maybe ( fromMaybe, fromJust )
+import Data.Maybe ( fromJust )
 
 ---------------------------------------
 -- helper functions

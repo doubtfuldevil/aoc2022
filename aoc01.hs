@@ -7,24 +7,12 @@ import System.IO
 ---------------------------------------
 -- helper functions
 ---------------------------------------
-
-hFetchLines :: Handle -> IO [String]
-hFetchLines h = do
+getInput :: String -> String -> IO [String]
+getInput mode day = do
+    let filename = mode ++ day
+    h <- openFile filename ReadMode
     content <- hGetContents h
-    let contentLines = lines content
-    return contentLines
-
-getTestInput :: String -> IO [String]
-getTestInput day = do
-    let filename = "test" ++ day
-    h <- openFile filename ReadMode
-    hFetchLines h
-
-getRealInput :: String -> IO [String]
-getRealInput day = do
-    let filename = "input" ++ day
-    h <- openFile filename ReadMode
-    hFetchLines h
+    return (lines content)
 
 ---------------------------------------
 -- main functionality
@@ -62,14 +50,14 @@ day = "01"
 
 part1 :: IO ()
 part1 = do
-    testInput <- getTestInput day
+    testInput <- getInput "test" day
     print(maxElf testInput)
-    realInput <- getRealInput day
+    realInput <- getInput "input" day
     print(maxElf realInput)
 
 part2 :: IO ()
 part2 = do
-    testInput <- getTestInput day
+    testInput <- getInput "test" day
     print(max3Elves testInput)
-    realInput <- getRealInput day
+    realInput <- getInput "input" day
     print(max3Elves realInput)

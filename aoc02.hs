@@ -8,18 +8,12 @@ import System.IO
 ---------------------------------------
 -- helper functions
 ---------------------------------------
-
-hFetchLines :: Handle -> IO [String]
-hFetchLines h = do
-    content <- hGetContents h
-    let contentLines = lines content
-    return contentLines
-
 getInput :: String -> String -> IO [String]
 getInput mode day = do
     let filename = mode ++ day
     h <- openFile filename ReadMode
-    hFetchLines h
+    content <- hGetContents h
+    return (lines content)
 
 ---------------------------------------
 -- main functionality

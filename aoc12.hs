@@ -4,8 +4,8 @@ module AoC12 where
 import Data.List ( findIndex, elemIndex, elemIndices )
 import System.IO
     ( openFile, hGetContents, Handle, IOMode(ReadMode) )
-import Data.Char (digitToInt, ord)
-import Data.Maybe (fromJust, isJust, catMaybes, mapMaybe)
+import Data.Char (ord)
+import Data.Maybe (fromJust, isJust, mapMaybe)
 
 ---------------------------------------
 -- helper functions
@@ -82,11 +82,7 @@ startList i = start i : concatMap (\(y,l) -> map (,y) l ) z
     where rows = map (elemIndices 'a') i
           z = zip [0..] rows
 
---allSolutions :: Input -> [Coord] -> [Int]
---allSolutions i = mapMaybe (\c -> (lookup (goal i) . bfs [] [(c, 0)]) i)
-
---solution2 :: Input -> Int 
---solution2 i = minimum $ allSolutions i $ startList i
+solution2 :: Input -> Int
 solution2 i = (fromJust . lookup (goal i) . bfs [] (map (,0) (startList i))) i
 
 ---------------------------------------

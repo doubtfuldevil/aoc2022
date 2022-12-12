@@ -82,11 +82,12 @@ startList i = start i : concatMap (\(y,l) -> map (,y) l ) z
     where rows = map (elemIndices 'a') i
           z = zip [0..] rows
 
-allSolutions :: Input -> [Coord] -> [Int]
-allSolutions i = mapMaybe (\c -> (lookup (goal i) . bfs [] [(c, 0)]) i)
+--allSolutions :: Input -> [Coord] -> [Int]
+--allSolutions i = mapMaybe (\c -> (lookup (goal i) . bfs [] [(c, 0)]) i)
 
-solution2 :: Input -> Int 
-solution2 i = minimum $ allSolutions i $ startList i
+--solution2 :: Input -> Int 
+--solution2 i = minimum $ allSolutions i $ startList i
+solution2 i = (fromJust . lookup (goal i) . bfs [] (map (,0) (startList i))) i
 
 ---------------------------------------
 -- start functions

@@ -1,4 +1,4 @@
-module AoC0X where
+module AoC1X where
 
 import Data.List ( sort )
 import System.IO
@@ -14,19 +14,25 @@ getInput mode day = do
     content <- hGetContents h
     return (lines content)
 
+safeTail :: [a] -> [a]
+safeTail [] = []
+safeTail (x:xs) = xs
+
+splitOn :: Eq a => a -> [a] -> [[a]]
+splitOn _ [] = []
+splitOn del xs = takeWhile (/=del) xs:splitOn del (safeTail $ dropWhile (/=del) xs)
 ---------------------------------------
 -- main functionality
 ---------------------------------------
-
+type Input = [String]
 
 
 
 ---------------------------------------
 -- start functions
 ---------------------------------------
-
 day :: [Char]
-day = "0X"
+day = "1X"
 
 part1 :: IO ()
 part1 = do
